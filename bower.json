@@ -1,5 +1,5 @@
 {
-  "name": "paper-slider",
+  "name": "vertical-slider",
   "version": "1.0.15",
   "description": "A material design-style slider",
   "license": "http://polymer.github.io/LICENSE.txt",
@@ -10,16 +10,16 @@
     "slider",
     "control"
   ],
-  "main": "paper-slider.html",
+  "main": "vertical-slider.html",
   "repository": {
     "type": "git",
-    "url": "git://github.com/PolymerElements/paper-slider.git"
+    "url": "git://github.com/zbury/vertical-slider.git"
   },
   "ignore": [],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.1.0",
     "paper-input": "PolymerElements/paper-input#^1.0.0",
-    "paper-progress": "PolymerElements/paper-progress#^1.0.0",
+    "vertical-progress": "git://github.com/zbury/vertical-progress.git#^1.0.12",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
     "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "iron-behaviors": "PolymerElements/iron-behaviors#^1.0.0",

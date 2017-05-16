@@ -93,7 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <vertical-slider id="grade" pin value="20" secondary-progress="70"></vertical-slider>
 
         <script>
-          document.addEventListener('WebComponentsReady', function() {
+          window.addEventListener('WebComponentsReady', function() {
             var ratings = document.querySelector('#ratings');
             ratings.addEventListener('value-change', function() {
               document.querySelector('#ratingsLabel').textContent = ratings.value;
@@ -111,7 +111,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </div>
 
   <script>
-    document.addEventListener('WebComponentsReady', function() {
+    window.addEventListener('WebComponentsReady', function() {
       var ratings = document.querySelector('#ratings');
       ratings.addEventListener('value-change', function() {
         document.querySelector('#ratingsLabel').textContent = ratings.value;

@@ -71,9 +71,9 @@ Custom property | Description | Default
   <template strip-whitespace>
     <style>
       :host {
-        @apply(--layout-vertical);
-        @apply(--layout-justified);
-        @apply(--layout-center);
+        @apply --layout-vertical;
+        @apply --layout-justified;
+        @apply --layout-center;
         height: 200px;
         cursor: default;
         -webkit-user-select: none;
@@ -81,10 +81,10 @@ Custom property | Description | Default
         -ms-user-select: none;
         user-select: none;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        --vertical-progress-active-color: var(--vertical-slider-active-color, --google-blue-700);
-        --vertical-progress-secondary-color: var(--vertical-slider-secondary-color, --google-blue-300);
-        --vertical-progress-disabled-active-color: var(--vertical-slider-disabled-active-color, --paper-grey-400);
-        --vertical-progress-disabled-secondary-color: var(--vertical-slider-disabled-secondary-color, --paper-grey-400);
+        --vertical-progress-active-color: var(--vertical-slider-active-color, var(--google-blue-700));
+        --vertical-progress-secondary-color: var(--vertical-slider-secondary-color, var(--google-blue-300));
+        --vertical-progress-disabled-active-color: var(--vertical-slider-disabled-active-color, var(--paper-grey-400));
+        --vertical-progress-disabled-secondary-color: var(--vertical-slider-disabled-secondary-color, var(--paper-grey-400));
         --calculated-vertical-slider-width: var(--vertical-slider-width, 2px);
       }
 
@@ -137,7 +137,7 @@ Custom property | Description | Default
         height: 100%;
         width: var(--calculated-vertical-slider-width);
         background-color: var(--vertical-slider-bar-color, transparent);
-        --vertical-progress-container-color: var(--vertical-slider-container-color, --paper-grey-400);
+        --vertical-progress-container-color: var(--vertical-slider-container-color, var(--paper-grey-400));
       }
 
       .slider-markers {
@@ -148,11 +148,11 @@ Custom property | Description | Default
         top: -1px;
         box-sizing: border-box;
         pointer-events: none;
-        @apply(--layout-vertical);
+        @apply --layout-vertical;
       }
 
       .slider-marker {
-        @apply(--layout-flex);
+        @apply --layout-flex;
       }
       .slider-markers::after,
       .slider-marker::after {
@@ -195,8 +195,8 @@ Custom property | Description | Default
         margin: 10px;
         width: calc(100% - 20px);
         height: calc(100% - 20px);
-        background-color: var(--vertical-slider-knob-color, --google-blue-700);
-        border: 2px solid var(--vertical-slider-knob-color, --google-blue-700);
+        background-color: var(--vertical-slider-knob-color, var(--google-blue-700));
+        border: 2px solid var(--vertical-slider-knob-color, var(--google-blue-700));
         border-radius: 50%;
 
         -moz-box-sizing: border-box;
@@ -215,11 +215,11 @@ Custom property | Description | Default
 
       .ring > .slider-knob > .slider-knob-inner {
         background-color: var(--vertical-slider-knob-start-color, transparent);
-        border: 2px solid var(--vertical-slider-knob-start-border-color, --paper-grey-400);
+        border: 2px solid var(--vertical-slider-knob-start-border-color, var(--paper-grey-400));
       }
 
       .slider-knob-inner::before {
-        background-color: var(--vertical-slider-pin-color, --google-blue-700);
+        background-color: var(--vertical-slider-pin-color, var(--google-blue-700));
       }
 
       .pin > .slider-knob > .slider-knob-inner::before {
@@ -243,7 +243,7 @@ Custom property | Description | Default
       }
 
       .pin.ring > .slider-knob > .slider-knob-inner::before {
-        background-color: var(--vertical-slider-pin-start-color, --paper-grey-400);
+        background-color: var(--vertical-slider-pin-start-color, var(--paper-grey-400));
       }
 
       .pin.expand > .slider-knob > .slider-knob-inner::before {
@@ -279,7 +279,7 @@ Custom property | Description | Default
         --paper-input-container-input: {
           text-align: center;
         };
-        @apply(--vertical-slider-input);
+        @apply --vertical-slider-input;
       }
 
       /* disabled state */
@@ -288,19 +288,19 @@ Custom property | Description | Default
       }
 
       .disabled > .slider-knob > .slider-knob-inner {
-        background-color: var(--vertical-slider-disabled-knob-color, --paper-grey-400);
-        border: 2px solid var(--vertical-slider-disabled-knob-color, --paper-grey-400);
+        background-color: var(--vertical-slider-disabled-knob-color, var(--paper-grey-400));
+        border: 2px solid var(--vertical-slider-disabled-knob-color, var(--paper-grey-400));
         -webkit-transform: scale3d(0.75, 0.75, 1);
         transform: scale3d(0.75, 0.75, 1);
       }
 
       .disabled.ring > .slider-knob > .slider-knob-inner {
         background-color: var(--vertical-slider-knob-start-color, transparent);
-        border: 2px solid var(--vertical-slider-knob-start-border-color, --paper-grey-400);
+        border: 2px solid var(--vertical-slider-knob-start-border-color, var(--paper-grey-400));
       }
 
       paper-ripple {
-        color: var(--vertical-slider-knob-color, --google-blue-700);
+        color: var(--vertical-slider-knob-color, var(--google-blue-700));
       }
     </style>
 
@@ -503,12 +503,12 @@ Custom property | Description | Default
       },
 
       _valueChanged: function() {
-        this.fire('value-change');
+        this.fire('value-change', {composed: true});
       },
 
       _immediateValueChanged: function() {
         if (this.dragging) {
-          this.fire('immediate-value-change');
+          this.fire('immediate-value-change', {composed: true});
         } else {
           this.value = this.immediateValue;
         }
@@ -558,6 +558,7 @@ Custom property | Description | Default
       },
 
       _trackStart: function(event) {
+        this._setTransiting(false);
         this._h = this.$.sliderBar.offsetHeight;
         this._y = this.ratio * this._h;
         this._starty = this._y;
@@ -595,7 +596,7 @@ Custom property | Description | Default
 
         s.transform = s.webkitTransform = '';
 
-        this.fire('change');
+        this.fire('change', {composed: true});
       },
 
       _knobdown: function(event) {
@@ -629,7 +630,7 @@ Custom property | Description | Default
         }
 
         this.async(function() {
-          this.fire('change');
+          this.fire('change', {composed: true});
         });
 
         // cancel selection
@@ -686,7 +687,7 @@ Custom property | Description | Default
           } else {
             this.increment();
           }
-          this.fire('change');
+          this.fire('change', {composed: true});
           event.preventDefault();
         }
       },
@@ -698,14 +699,14 @@ Custom property | Description | Default
           } else {
             this.decrement();
           }
-          this.fire('change');
+          this.fire('change', {composed: true});
           event.preventDefault();
         }
       },
 
       _changeValue: function(event) {
         this.value = event.target.value;
-        this.fire('change');
+        this.fire('change', {composed: true});
       },
 
       _inputKeyDown: function(event) {

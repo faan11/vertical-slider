@@ -19,7 +19,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
     "paper-input": "PolymerElements/paper-input#1 - 2",
-    "vertical-progress": "git://github.com/zbury/vertical-progress.git#1.0.13 -2",
+    "vertical-progress": "git://github.com/zbury/vertical-progress.git#1.0.13 - 2",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#1 - 2",
     "paper-styles": "PolymerElements/paper-styles#1 - 2",
     "iron-behaviors": "PolymerElements/iron-behaviors#1 - 2",
